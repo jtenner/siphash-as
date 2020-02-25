@@ -1,8 +1,8 @@
 (module
  (type $i32_=>_none (func (param i32)))
  (type $none_=>_none (func))
- (type $i32_=>_i32 (func (param i32) (result i32)))
  (type $i32_i32_=>_none (func (param i32 i32)))
+ (type $i32_=>_i32 (func (param i32) (result i32)))
  (type $i32_i32_=>_i32 (func (param i32 i32) (result i32)))
  (type $i32_i32_i32_=>_none (func (param i32 i32 i32)))
  (type $i32_i32_i32_=>_i32 (func (param i32 i32 i32) (result i32)))
@@ -10,7 +10,7 @@
  (type $none_=>_i32 (func (result i32)))
  (type $i32_i64_i32_=>_none (func (param i32 i64 i32)))
  (type $i32_i32_i32_i32_=>_none (func (param i32 i32 i32 i32)))
- (type $i64_=>_none (func (param i64)))
+ (type $i64_i32_=>_none (func (param i64 i32)))
  (type $i32_i32_i32_i32_i32_i32_i32_i32_i32_i32_i32_i32_i32_=>_i32 (func (param i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32) (result i32)))
  (type $i32_i32_i32_=>_i64 (func (param i32 i32 i32) (result i64)))
  (type $i32_=>_f64 (func (param i32) (result f64)))
@@ -3760,7 +3760,7 @@
   local.get $1
   call $~lib/rt/pure/__release
  )
- (func $node_modules/@as-pect/assembly/assembly/internal/Expected/Expected.report<i32> (; 55 ;) (param $0 i32)
+ (func $node_modules/@as-pect/assembly/assembly/internal/Expected/Expected.report<i32> (; 55 ;) (param $0 i32) (param $1 i32)
   global.get $node_modules/@as-pect/assembly/assembly/internal/Expected/Expected.ready
   i32.eqz
   if
@@ -3774,7 +3774,7 @@
   local.tee $0
   call $node_modules/@as-pect/assembly/assembly/internal/Reflect/attachStackTraceToReflectedValue
   local.get $0
-  i32.const 0
+  local.get $1
   call $node_modules/@as-pect/assembly/assembly/internal/Expected/reportExpectedReflectedValue
  )
  (func $node_modules/@as-pect/assembly/assembly/internal/assert/assert (; 56 ;) (param $0 i32) (param $1 i32)
@@ -3808,6 +3808,7 @@
   local.get $1
   call $node_modules/@as-pect/assembly/assembly/internal/Actual/reportActualReflectedValue
   local.get $0
+  i32.const 0
   call $node_modules/@as-pect/assembly/assembly/internal/Expected/Expected.report<i32>
   local.get $0
   i32.const 3
@@ -4189,6 +4190,8 @@
   local.get $2
   call $node_modules/@as-pect/assembly/assembly/internal/Actual/reportActualReflectedValue
   i32.const 16
+  local.get $0
+  i32.load
   call $node_modules/@as-pect/assembly/assembly/internal/Expected/Expected.report<i32>
   local.get $0
   i32.load
@@ -5344,8 +5347,8 @@
   local.get $1
   call $~lib/rt/pure/__release
  )
- (func $node_modules/@as-pect/assembly/assembly/internal/Expected/Expected.report<u64> (; 74 ;) (param $0 i64)
-  (local $1 i32)
+ (func $node_modules/@as-pect/assembly/assembly/internal/Expected/Expected.report<u64> (; 74 ;) (param $0 i64) (param $1 i32)
+  (local $2 i32)
   global.get $node_modules/@as-pect/assembly/assembly/internal/Expected/Expected.ready
   i32.eqz
   if
@@ -5356,10 +5359,10 @@
   global.set $~argumentsLength
   local.get $0
   call $node_modules/@as-pect/assembly/assembly/internal/Reflect/Reflect.toReflectedValue<u64>|trampoline
-  local.tee $1
+  local.tee $2
   call $node_modules/@as-pect/assembly/assembly/internal/Reflect/attachStackTraceToReflectedValue
+  local.get $2
   local.get $1
-  i32.const 0
   call $node_modules/@as-pect/assembly/assembly/internal/Expected/reportExpectedReflectedValue
  )
  (func $node_modules/@as-pect/assembly/assembly/internal/Expectation/Expectation<u64>#toBe (; 75 ;) (param $0 i32) (param $1 i64) (param $2 i32)
@@ -5380,6 +5383,8 @@
   local.get $5
   call $node_modules/@as-pect/assembly/assembly/internal/Actual/reportActualReflectedValue
   local.get $1
+  local.get $0
+  i32.load
   call $node_modules/@as-pect/assembly/assembly/internal/Expected/Expected.report<u64>
   local.get $0
   i32.load
