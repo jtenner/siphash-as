@@ -608,19 +608,21 @@ let vectors: string[][] = [
 test("value", () => {
   let len = vectors.length;
   for (let i = 4; i < len; i++) {
-    let vector = vectors[i];
-    expect<string[]>(vector).toHaveLength(3, "Length must be 3");
-    let key = String.UTF8.encode(vector[0]);
-    expect<i32>(key.byteLength).toBe(16, "Key: " + vector[0] + " should have 16 bytes");
-    let value = String.UTF8.encode(vector[1]);
+    let vector = unchecked(vectors[i]);
+    expect(vector).toHaveLength(3, "Length must be 3");
+    let key = String.UTF8.encode(unchecked(vector[0]));
+
+    // byteLength
+    expect(key).toHaveLength(16, "Key: " + unchecked(vector[0]) + " should have 16 bytes");
+    let value = String.UTF8.encode(unchecked(vector[1]));
 
     let result = SipHash.hash(key, changetype<usize>(value), value.byteLength);
 
     let upper = <u64>parseInt(vector[2].slice(0, 8), 16);
     let lower = <u64>parseInt(vector[2].slice(8), 16);
     lower |= (upper << 32);
-    expect<u64>(result).toBe(lower,
-      "Key: " + vector[0] + " Value: " + vector[1] + " Actual: " + result.toString() + " Expected: 0x" + vector[2],
+    expect(result).toBe(lower,
+      "Key: " + unchecked(vector[0]) + " Value: " + unchecked(vector[1]) + " Actual: " + result.toString() + " Expected: 0x" + unchecked(vector[2]),
     );
   }
 });

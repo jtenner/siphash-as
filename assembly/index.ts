@@ -1,4 +1,5 @@
-let siphashptr = __retain(__alloc(8, idof<ArrayBuffer>()));
+const temp = [0] as u64[];
+const siphashptr = temp.dataStart;
 
 export namespace SipHash {
   export function hash(key: ArrayBuffer, m: usize, offset: usize): u64 {
@@ -173,6 +174,6 @@ export namespace SipHash {
     v3 ^= v0;
     v2 = rotl<u64>(v2, 32);
 
-    return ((v0 ^ v1) ^ v2) ^ v3;
+    return v0 ^ v1 ^ v2 ^ v3;
   }
 }
