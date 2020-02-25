@@ -1,8 +1,8 @@
 {
-  "name": "@morp/siphash",
+  "name": "siphash-as",
   "types": "types/index.d.ts",
   "version": "0.1.0",
-  "description": "A siphash algorithm used for bloom filtering in morp",
+  "description": "A siphash algorithm ported from jedisct/siphash-js",
   "keywords": [
     "assemblyscript",
     "webassembly",
